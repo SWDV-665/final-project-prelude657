@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>***The Rio Blog Builder***</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg-style">
+ 
+  
+<!-- if no items on the list --> 
+<h3 *ngIf ="loadItems().length === 0"> 
+  No items available on the list
+</h3>
+
+<!-- Avatar --> 
+  <ion-avatar class="avatars">
+    <img src="https://i.ibb.co/64GpRf1/download.png">
+  </ion-avatar>
+  <h1 style="text-align:center;">Welcome to The Rio Blog Builder App</h1>
+  <p style= "text-align:center; color:yellow; font-size: 20px; background-color: green; background-blend-mode: color-burn;">
+
+<!-- Text --> 
+ <b>This app will help you: </b>
+  <b style="text-align:center; font-size: 8px;">
+  <br> -Visit the top sites around Rio 
+  <br> -Write about each site for your blog 
+  <br> -Add/Remove landmarks from your to-do list  
+  </b>
+  </p>
+
+<!-- List of Items --> 
+ <ion-list>
+  <ion-item-sliding *ngFor="let item of loadItems(); let i = index">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="https://i.ibb.co/64GpRf1/download.png">
+      </ion-avatar>
+      <p><b> {{item.name}}</b></p>
+      <p>{{item.description}}</p>
+      <p><b>price:</b></p>
+      <p>{{"$" + item.price}}</p>
+         <ion-item>
+      <ion-textarea placeholder="Enter text for this landmark here">{{item.description}} </ion-textarea>
+    </ion-item>
+
+<!-- Remove Item button --> 
+    </ion-item>
+    <ion-item-options side="right">
+      <button (click)="removeItem(item,i)"  ion-button color="danger">
+        <ion-icon name="trash"></ion-icon>
+       Delete
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+
+<!-- GeoLocation button --> 
+  <button (click)="showMap()" ion-button color="light">
+    <ion-icon name="globe"></ion-icon>
+    ......Your Current GPS Location
+  
+  </button>
+
+ <!-- Complete prompt -->  
+  <button (click)="showPrompt()" ion-button color="secondary">
+    <ion-label><b>Complete ??? </b></ion-label>
+    <br>
+    <ion-icon name="globe"></ion-icon>
+  </button>
+</ion-list> 
+
+<!--Add item FAB button --> 
+<ion-fab top right>
+  <button (click)="addItem()" ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+</ion-fab>
+</ion-content>
